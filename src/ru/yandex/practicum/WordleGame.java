@@ -1,26 +1,11 @@
 package ru.yandex.practicum;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-class WrongLengthException extends Exception {
-    public WrongLengthException(String message) {
-        super(message);
-    }
-}
-
-class WordNotFoundInDictionary extends Exception {
-    public WordNotFoundInDictionary(String message) {
-        super(message);
-    }
-}
-// стоит все таки вынести исключения в отдельный класс или их можно оставить тут?
+import java.util.*;
 
 public class WordleGame {
 
-    private List<String> usedHints = new ArrayList<>();
+    private final Set<String> usedHints = new HashSet<>();
 
     private final PrintWriter log;
 
@@ -86,8 +71,10 @@ public class WordleGame {
                     "Ответ отсутствует среди вариантов."
             );
         }
+        log.println("Ввод игрока: " + guess);
+        log.println("Подсказка: " + hint);
+        log.println("Количество вариантов: " + varOfAnswer.size());
         steps--;
-        log.println("Осталось попыток: " + steps);
         return hint;
 
 

@@ -48,7 +48,7 @@ class WordleTest {
         assertTrue(dictionary.contains("слово"));
         assertTrue(dictionary.contains("песик"));
         assertFalse(dictionary.contains("мама"));
-        assertTrue(dictionary.size() >= 4);
+        assertEquals(4, dictionary.size());
     }
 
     @Test
