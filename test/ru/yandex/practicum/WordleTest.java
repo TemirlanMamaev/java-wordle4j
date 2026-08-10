@@ -60,6 +60,7 @@ class WordleTest {
     }
 
 }
+
 class WordleGameTest {
 
     private PrintWriter log;
