@@ -1,14 +1,84 @@
 package ru.yandex.practicum;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-/*
-этот класс содержит в себе список слов List<String>
-    его методы похожи на методы списка, но учитывают особенности игры
-    также этот класс может содержать рутинные функции по сравнению слов, букв и т.д.
- */
 public class WordleDictionary {
 
-    private List<String> words;
+    public List<String> getWords() {
+        return new ArrayList<>(words);
+    }
+
+    private final List<String> words;
+
+    public WordleDictionary(List<String> words) {
+        List<String> goodWords = new ArrayList<>();
+        for (String word : words) {
+            String normalized = normalize(word);
+            if (normalized.length() == 5) {
+                goodWords.add(normalized);
+            }
+        }
+        if (goodWords.isEmpty()) {
+            throw new IllegalStateException("Словарь пуст или не содержит слов длины 5");
+        }
+        this.words = goodWords;
+    }
+
+
+    public boolean contains(String word) {
+        return words.contains(word);
+    }
+
+    public int size() {
+        return words.size();
+    }
+
+    public String getRandomWord() {
+        Random random = new Random();
+        int index = random.nextInt(words.size());
+        return words.get(index);
+    }
+
+    private String normalize(String word) {
+        word = word.toLowerCase();
+        word = word.replace("ё", "е");
+        return word;
+    }
+
+    public static String checkWord(String answer, String guess) {
+        char[] copiedAnswer = answer.toCharArray();
+        char[] finalWord = new char[5];
+        for (int i = 0; i < 5; i++) {
+            if (copiedAnswer[i] == guess.charAt(i)) {
+                finalWord[i] = '+';
+                copiedAnswer[i] = 'X';
+            }
+
+        }
+
+        for (int i = 0; i < 5; i++) {
+            if (finalWord[i] == '+') {
+                continue;
+            }
+
+            boolean found = false;
+
+            for (int j = 0; j < 5; j++) {
+                if (copiedAnswer[j] == guess.charAt(i)) {
+                    finalWord[i] = '^';
+                    copiedAnswer[j] = 'X';
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                finalWord[i] = '-';
+            }
+        }
+        return new String(finalWord);
+    }
 
 }
