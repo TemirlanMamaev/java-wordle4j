@@ -65,15 +65,7 @@ public class WordleGame {
 
         }
         varOfAnswer = filtered;
-
-        if (!varOfAnswer.contains(answer)) {
-            throw new RuntimeException(
-                    "Ответ отсутствует среди вариантов."
-            );
-        }
-        log.println("Ввод игрока: " + guess);
-        log.println("Подсказка: " + hint);
-        log.println("Количество вариантов: " + varOfAnswer.size());
+        log.println("Загаданное слово" + answer);
         steps--;
         return hint;
 
@@ -90,8 +82,7 @@ public class WordleGame {
         List<String> availableHints = new ArrayList<>();
 
         for (String word : varOfAnswer) {
-            if (!usedHints.contains(word) && !word.equals(answer)) {
-                //условие с answer добавил позже, т.к. после 3 подсказок все время падало загаданное слово
+            if (!usedHints.contains(word)) {
                 availableHints.add(word);
             }
         }

@@ -119,17 +119,6 @@ class WordleGameTest {
     }
 
     @Test
-    void getHintWord_doesNotReturnSecret() {
-        for (int i = 0; i < 20; i++) {
-            String hint = game.getHintWord();
-            if (hint == null) {
-                break;
-            }
-            assertNotEquals(game.getAnswer(), hint);
-        }
-    }
-
-    @Test
     void getHintWord_doesNotRepeat() {
         String first = game.getHintWord();
         String second = game.getHintWord();

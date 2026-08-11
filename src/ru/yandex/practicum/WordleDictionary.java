@@ -20,8 +20,12 @@ public class WordleDictionary {
                 goodWords.add(normalized);
             }
         }
+        if (goodWords.isEmpty()) {
+            throw new IllegalStateException("Словарь пуст или не содержит слов длины 5");
+        }
         this.words = goodWords;
     }
+
 
     public boolean contains(String word) {
         return words.contains(word);
